@@ -14,7 +14,7 @@
 
       <LoginForm />
       <div class="des">
-        已经有账号？去<span class="toggle" @click="showSignup = !showSignup">注册</span>
+        还没有账号？去<span class="toggle" @click="showSignup = !showSignup">注册</span>
       </div>
     </template>
   </div>

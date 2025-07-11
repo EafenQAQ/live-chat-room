@@ -4,17 +4,28 @@
       <h2 class="title">登录账号</h2>
       <input type="email" placeholder="邮箱" v-model="email" />
       <input type="password" placeholder="密码" v-model="password" />
-
+      <div class="error">{{ error }}</div>
       <button>登录</button>
     </form>
   </div>
 </template>
 
 <script setup>
+import { useLogin } from '@/composables/useLogin';
 import { ref } from 'vue';
 
 const email = ref('')
 const password = ref('')
+
+const { login, error } = useLogin()
+
+const handleSubmit = async () => {
+  await login(email.value, password.value)
+  if (error.value) {
+    error.value = "邮箱或密码不正确"
+  }
+}
+
 </script>
 
 <style scoped>

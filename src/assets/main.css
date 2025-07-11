@@ -56,3 +56,11 @@ body {
   --secondary-light: hsl(from var(--secondary-color) h calc(s + 20) l);
   --secondary-accent: hsl(from var(--secondary-color) h calc(s - 20) l);
 }
+
+/* 错误信息样式 */
+.error {
+  color: red;
+  font-size: 1rem;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}

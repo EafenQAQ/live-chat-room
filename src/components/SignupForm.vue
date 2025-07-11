@@ -6,13 +6,14 @@
       <input type="email" placeholder="邮箱" v-model="email" />
       <input type="password" placeholder="密码" v-model="password" />
       <input type="password" placeholder="确认密码" v-model="confirmPassword">
-
+      <div class="error">{{ error }}</div>
       <button>注册</button>
     </form>
   </div>
 </template>
 
 <script setup>
+import { useSignup } from '@/composables/useSignup';
 import { ref } from 'vue';
 
 
@@ -20,6 +21,21 @@ const displayName = ref('')
 const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
+
+const { signup, error } = useSignup()
+
+const handleSubmit = async () => {
+  if (password.value !== confirmPassword.value) {
+    console.log('密码不一致')
+    error.value = '密码不一致'
+    return
+  }
+  await signup(email.value, password.value, displayName.value)
+  if (!error.value) {
+    console.log('注册成功！')
+  }
+}
+
 </script>
 
 <style scoped>
@@ -29,11 +45,13 @@ const confirmPassword = ref('')
   margin-bottom: 1rem;
 
 }
+
 #signup-form {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 form {
   display: flex;
   flex-direction: column;
@@ -41,6 +59,7 @@ form {
   /* 宽度 */
   width: 30rem;
 }
+
 /* 输入框样式 */
 input {
   font-size: 1rem;
@@ -50,9 +69,11 @@ input {
   outline: none;
   transition: all 0.3s ease;
 }
+
 input:focus {
   border-color: var(--base-color-500);
 }
+
 /* 按钮样式 */
 button {
   font-size: 1.5rem;
@@ -64,6 +85,7 @@ button {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
 button:hover {
   background-color: var(--secondary-color-500);
 }
