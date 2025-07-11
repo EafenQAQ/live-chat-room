@@ -4,16 +4,17 @@
       <h2 class="title">登录账号</h2>
       <input type="email" placeholder="邮箱" v-model="email" />
       <input type="password" placeholder="密码" v-model="password" />
-      <div class="des">
-        已经有账号？去<span class="toggle">注册</span>
-      </div>
+
       <button>登录</button>
     </form>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 
+const email = ref('')
+const password = ref('')
 </script>
 
 <style scoped>
@@ -23,12 +24,14 @@
   margin-bottom: 1rem;
 
 }
+
 #signup-form {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+
 }
+
 form {
   display: flex;
   flex-direction: column;
@@ -36,6 +39,7 @@ form {
   /* 宽度 */
   width: 30rem;
 }
+
 /* 输入框样式 */
 input {
   font-size: 1rem;
@@ -45,9 +49,11 @@ input {
   outline: none;
   transition: all 0.3s ease;
 }
+
 input:focus {
   border-color: var(--base-color-500);
 }
+
 /* 按钮样式 */
 button {
   font-size: 1.5rem;
@@ -59,19 +65,8 @@ button {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
 button:hover {
   background-color: var(--secondary-color-500);
-}
-.toggle {
-  color: var(--base-color);
-  cursor: pointer;
-}
-.toggle:hover {
-  text-decoration: underline;
-}
-.des {
-  font-size: 1rem;
-  margin: 0 auto;
-  margin-bottom: 1rem;
 }
 </style>

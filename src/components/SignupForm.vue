@@ -6,16 +6,20 @@
       <input type="email" placeholder="邮箱" v-model="email" />
       <input type="password" placeholder="密码" v-model="password" />
       <input type="password" placeholder="确认密码" v-model="confirmPassword">
-      <div class="des">
-        已经有账号？去<span class="toggle">登录</span>
-      </div>
+
       <button>注册</button>
     </form>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 
+
+const displayName = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
 </script>
 
 <style scoped>
@@ -29,7 +33,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 form {
   display: flex;
@@ -64,13 +67,7 @@ button {
 button:hover {
   background-color: var(--secondary-color-500);
 }
-.toggle {
-  color: var(--base-color);
-  cursor: pointer;
-}
-.toggle:hover {
-  text-decoration: underline;
-}
+
 .des {
   font-size: 1rem;
   margin: 0 auto;
