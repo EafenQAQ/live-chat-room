@@ -17,12 +17,18 @@ import { ref } from 'vue';
 const email = ref('')
 const password = ref('')
 
+const emit = defineEmits(['login'])
+
 const { login, error } = useLogin()
 
 const handleSubmit = async () => {
   await login(email.value, password.value)
   if (error.value) {
     error.value = "邮箱或密码不正确"
+  }
+  if (!error.value) {
+    console.log('登录成功！')
+    emit('login')
   }
 }
 

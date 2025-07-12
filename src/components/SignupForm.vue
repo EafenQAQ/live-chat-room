@@ -16,6 +16,7 @@
 import { useSignup } from '@/composables/useSignup';
 import { ref } from 'vue';
 
+const emit = defineEmits(['signup'])
 
 const displayName = ref('')
 const email = ref('')
@@ -33,6 +34,7 @@ const handleSubmit = async () => {
   await signup(email.value, password.value, displayName.value)
   if (!error.value) {
     console.log('注册成功！')
+    emit('signup')
   }
 }
 
