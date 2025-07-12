@@ -1,8 +1,11 @@
 <template>
   <nav v-if="user" id="NavBar">
     <div class="text-area">
-      <p>你好！{{ user.displayName }}</p>
-      <p>你的邮箱：{{user.email}}</p>
+      <p class="greeting">你好！<span>{{ user.displayName }}</span></p>
+      <p class="email-text">{{ user.email }}</p>
+    </div>
+    <div>
+      <h2>聊天室</h2>
     </div>
     <button @click="handleClick">
       登出
@@ -14,23 +17,35 @@
 <script setup>
 import { useLogout } from '@/composables/useLogout';
 import { getUser } from '@/composables/getUser';
-import { useRouter } from 'vue-router';
 
 const { logout, error } = useLogout()
 const { user } = getUser()
-const router = useRouter();
+
 
 const handleClick = async () => {
   await logout()
   if (!error.value) {
     console.log('注销成功！')
-    router.push({ name: 'welcome' })
+
   }
 }
 
 </script>
 
 <style scoped>
+span {
+  color: var(--base-color);
+  font-weight: bold;
+}
+
+/* 置顶 */
+#NavBar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
 button {
   background-color: var(--error-color);
 }
@@ -44,7 +59,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 2rem;
+  padding: 0 2rem;
   /* 宽度 */
   width: 100%;
 
@@ -56,7 +71,17 @@ button:hover {
 
 .text-area {
   display: flex;
-
-  gap: 0.5rem;
+  flex-direction: column;
+}
+/* 清除margin */
+p {
+  margin: 0;
+}
+.email-text {
+  font-size: 0.8rem;
+  color: #8e8e8e;
+}
+.greeting {
+  font-size: 1.2rem;
 }
 </style>

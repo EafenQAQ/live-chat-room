@@ -27,8 +27,10 @@ import SignupForm from '@/components/SignupForm.vue';
 
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { projectAuth } from '@/firebase/config';
 
-
+const userState = projectAuth.currentUser
+console.log('current user state is :', userState)
 
 const showSignup = ref(false);
 
