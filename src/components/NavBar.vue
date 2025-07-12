@@ -5,7 +5,7 @@
       <p>你的邮箱：{{user.email}}</p>
     </div>
     <button @click="handleClick">
-      注销
+      登出
     </button>
 
   </nav>
