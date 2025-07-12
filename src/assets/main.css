@@ -55,12 +55,30 @@ body {
 
   --secondary-light: hsl(from var(--secondary-color) h calc(s + 20) l);
   --secondary-accent: hsl(from var(--secondary-color) h calc(s - 20) l);
+
+  --error-color: #f95656;
 }
 
 /* 错误信息样式 */
 .error {
-  color: red;
+  color: var(--error-color);
   font-size: 1rem;
   margin: 0 auto;
   margin-bottom: 1rem;
+}
+
+/* 基础按钮样式 */
+button {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 2rem;
+  background-color: var(--base-color-600);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--base-color-700);
 }
