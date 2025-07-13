@@ -57,6 +57,9 @@ body {
   --secondary-accent: hsl(from var(--secondary-color) h calc(s - 20) l);
 
   --error-color: #f95656;
+
+  
+
 }
 
 /* 错误信息样式 */

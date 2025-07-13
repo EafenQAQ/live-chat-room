@@ -38,14 +38,18 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
+form, textarea {
+  width: 100%;
+}
+
 .chat-form {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 2rem;
+
   /* 宽度 */
   width: 100%;
-  margin-top: 5rem;
+
 }
 
 form {
@@ -59,14 +63,13 @@ textarea {
   font-size: 1rem;
   padding: 1.5rem;
   border: 1px solid var(--secondary-color);
-  border-radius: 2rem;
+  border-radius: 0 0 2rem 2rem;
   outline: none;
   transition: all 0.3s ease;
   resize: none;
   min-height: 10rem;
   max-height: 20rem;
-  width: 40rem;
-  max-width: 50rem;
+
 
 }
 </style>
