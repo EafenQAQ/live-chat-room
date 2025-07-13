@@ -1,10 +1,49 @@
 <template>
-  <div id="ChatWindow">
-    <p v-if="document">ChatWindow</p>
+  <div id="ChatWindow" ref="messages">
+    <p v-if="!documents.length">ChatWindow</p>
+    <div class="error" v-if="error">{{ error }}</div>
+    <template v-else>
+      <div v-for="document in formattedDocuments" :key="document">
+        <div class="created-at">{{ document.createdAt }}</div>
+        <div class="flex">
+          <div class="name">{{ document.name }}:</div>
+          <div class="message">{{ document.message }}</div>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
 <script setup>
+import getCollection from '@/composables/getCollection';
+import { formatDistanceToNow } from 'date-fns'
+import { computed, onUpdated, ref } from 'vue';
+import { zhCN } from 'date-fns/locale';
+
+const { documents, error } = getCollection('message')
+
+const formattedDocuments = computed(() => {
+
+  if (documents.value) {
+
+    return documents.value.map((doc) => {
+      let time = formatDistanceToNow(doc.createdAt.toDate(), { locale: zhCN, addSuffix: true })
+      return { ...doc, createdAt: time }
+    }
+    )
+  } else return []
+
+
+
+}
+)
+
+const messages = ref(null)
+
+onUpdated(() => {
+  messages.value.scrollTop = messages.value.scrollHeight
+}
+)
 
 </script>
 
@@ -76,5 +115,27 @@
     padding: 1.5rem;
     border-radius: 1.5rem 1.5rem 0 0;
   }
+}
+
+/* 格式化消息 */
+.created-at {
+  font-size: 0.75rem;
+  color: var(--secondary-color-400);
+  margin-bottom: 0.25rem;
+}
+
+.name {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  color: var(--base-color-600);
+}
+
+.message {
+  white-space: pre-line;
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
 }
 </style>

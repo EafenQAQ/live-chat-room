@@ -21,7 +21,7 @@ const { addDoc, error } = useCollection('message')
 const handleSubmit = async () => {
   const chat = {
     name: user.value.displayName,
-    createAt: timeStamp(),
+    createdAt: timeStamp(),
     message: message.value,
 
   }
