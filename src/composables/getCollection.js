@@ -1,14 +1,15 @@
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { projectFirestore } from '@/firebase/config'
 
 const getCollection = (collection) => {
   const error = ref(null)
   const documents = ref([])
 
-  projectFirestore
+  const unsubscribe = projectFirestore
     .collection(collection)
     .orderBy('createdAt')
     .onSnapshot((snap) => {
+      console.log('snapshot')
       let results = []
       snap.docs.forEach((doc) => {
         doc.data().createdAt && results.push({ ...doc.data(), id: doc.id })
@@ -19,6 +20,15 @@ const getCollection = (collection) => {
       console.error(err.message)
       error.value = "获取数据失败"
       documents.value = []
+    }
+    )
+
+    // 断开snapshot链接
+    watchEffect((onInvalidate) => {
+      onInvalidate(() => {
+        unsubscribe()
+      }
+      )
     }
     )
 
